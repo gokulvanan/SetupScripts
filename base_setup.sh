@@ -4,6 +4,7 @@ function check()
   count=$(which $1 | wc -l);
   if [ count -eq 0 ]; then
     echo "$1 not installed"
+    exit 1
   else 
     echo "$1 is installed"
   fi
@@ -36,13 +37,11 @@ check screen
 
 #
 # git pull and install dotfiles as well
+mkdir git
+cd git
+git clone git@github.com:gokulvanan/SetupScripts.git
 cd $HOME
-#if [ -d ./config_files/ ]; then
-#    mv dotfiles dotfiles.old
-#fi
-#git clone https://github.com/startup-class/dotfiles.git
-#ln -sb git/dotfiles/.screenrc .
-#ln -sb git/dotfiles/.bash_profile .
-#ln -sb git/dotfiles/.bashrc .
-#ln -sb git/dotfiles/.bashrc_custom .
-#ln -sf git/dotfiles/.emacs.d .
+ln -sb git/SetupScripts/config/.screenrc .
+ln -sb git/SetupScripts/config/.bashrc_custom .
+ln -sb git/SetupScripts/config/.vimrc .
+echo " source ~/.bashrc_custom" >> ~/.bashrc

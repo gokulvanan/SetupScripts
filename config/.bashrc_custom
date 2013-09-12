@@ -1,0 +1,16 @@
+#enviormnet configs
+MYVIMRC=~/.vimrc
+
+#play alias setup
+alias 2play="/home/gokulvanan/Play/play-2.1.1/play"
+alias play="/home/gokulvanan/Play/play-1.2.5/play"
+
+
+#AWS webservices console
+export AWS_CONFIG_FILE=~/aws/.config
+
+function ec2grep()
+{
+  cat ~/aws/ec2HelpFile | grep $1
+
+}
