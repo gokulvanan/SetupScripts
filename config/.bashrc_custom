@@ -1,10 +1,9 @@
-#enviormnet configs
+#vim config
 MYVIMRC=~/.vimrc
 
 #play alias setup
-alias 2play="/home/gokulvanan/Play/play-2.1.1/play"
-alias play="/home/gokulvanan/Play/play-1.2.5/play"
 
+#server start utils
 
 #AWS webservices console
 export AWS_CONFIG_FILE=~/aws/.config
@@ -14,3 +13,9 @@ function ec2grep()
   cat ~/aws/ec2HelpFile | grep $1
 
 }
+
+#alsias for easyrep
+alias easyrep=/home/gokulvanan/git/easyReports/bin/easyrep
+
+#configuring path for JAVA, SCALA (SBT), Node etc.. 
+export PATH=/home/gokulvanan/Coursera/Scala/sbt/bin:$PATH
