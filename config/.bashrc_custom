@@ -1,9 +1,20 @@
-#vim config
+#enviormnet configs
 MYVIMRC=~/.vimrc
 
 #play alias setup
+alias 2play="/home/gokulvanan/Play/play-2.1.1/play"
+alias play="/home/gokulvanan/Play/play-1.2.5/play"
+alias play2="/home/gokulvanan/Play/play-2.2.1/play"
+#startup utils
+function startTeacherAsst()
+{
+ cd /home/gokulvanan/Play/workspace/teacherAssistant && $play run
+}
 
-#server start utils
+function testTeacherAsst()
+{
+ cd /home/gokulvanan/Play/workspace/teacherAssistant && $play test
+}
 
 #AWS webservices console
 export AWS_CONFIG_FILE=~/aws/.config
@@ -14,8 +25,30 @@ function ec2grep()
 
 }
 
-#alsias for easyrep
 alias easyrep=/home/gokulvanan/git/easyReports/bin/easyrep
-
-#configuring path for JAVA, SCALA (SBT), Node etc.. 
+alias seclipse=/home/gokulvanan/Coursera/Scala/eclipse/eclipse
 export PATH=/home/gokulvanan/Coursera/Scala/sbt/bin:$PATH
+
+function makescala()
+{
+  loc=$(pwd);
+  echo -n "Name of the project: "
+  read name;
+  echo -n "version: "
+  read version;
+  mkdir -p $loc/$name/src/main/scala $loc/$name/src/test/scala $loc/$name/src/main/resources $loc/$name/src/test/resources $loc/$name/project $loc/$name/lib
+  #build.sbt
+  touch $loc/$name/build.sbt
+  echo 'name := "$name"' >> $loc/$name/build.sbt
+  echo '' >> $loc/$name/build.sbt
+  echo 'version := "$version"' >> $loc/$name/build.sbt
+  echo '' >> $loc/$name/build.sbt
+  echo 'scalaVersion := "2.101.2"' >> $loc/$name/build.sbt
+  #.gitignore
+  echo "target/" > $loc/$name/.gitignore
+  #Hello.scala
+  echo "" > $loc/$name/src/main/scala/Hello.scala
+  echo "object Hello {" >> $loc/$name/src/main/scala/Hello.scala
+  echo "  def main(args: Array[String]) = println(\"Hello World!\"); " >> $loc/$name/src/main/scala/Hello.scala
+  echo " }" >> $loc/$name/src/main/scala/Hello.scala
+}

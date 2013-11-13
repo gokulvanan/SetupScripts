@@ -69,3 +69,11 @@ set smartindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" Nerd tree mapping
+map tree :NERDTreeToggle<CR>
+
+" Tab navigation mapping
+map <C-l> :tabn<CR>
+map <C-h> :tabp<CR>
+map <C-n> :tabe<CR>
