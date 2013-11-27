@@ -7,10 +7,10 @@ set tags=tags;/
   
 " line numbers
 set number
-:highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+":highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 " http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
-:autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+":autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 
 " highlight unwanted(trailing) whitespace
 " + have this highlighting not appear whilst you are typing in insert mode
@@ -66,10 +66,8 @@ set tabstop=2
 map 0 ^
  
 set smartindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
+set cpoptions+=$
+set virtualedit=all
 " Nerd tree mapping
 map tree :NERDTreeToggle<CR>
 
