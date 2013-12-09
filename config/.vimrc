@@ -1,3 +1,6 @@
+" eclim setup
+set nocompatible
+
 " pathongen
 execute pathogen#infect()
 syntax on
@@ -69,9 +72,17 @@ set smartindent
 set cpoptions+=$
 set virtualedit=all
 " Nerd tree mapping
-map tree :NERDTreeToggle<CR>
+nnoremap tree :NERDTreeToggle<cr>
 
 " Tab navigation mapping
-map <C-l> :tabn<CR>
-map <C-h> :tabp<CR>
-map <C-n> :tabe<CR>
+nnoremap <c-l> :tabn<cr>
+nnoremap <c-h> :tabp<cr>
+nnoremap <c-n> :tabe<cr>
+
+"added for eclim
+nnoremap <c-i> :JavaImport<cr>
+nnoremap <c-d> :JavaDocSearch -x declarations <cr>
+nnoremap <cr> :JavaSearchContext <cr>
+"added for using super tab in eclim context
+let g:SuperTabDefaultCompletionType = 'context'
+let g:EclimJavaSearchSingleResult = 'tabnew'
