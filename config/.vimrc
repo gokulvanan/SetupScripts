@@ -85,4 +85,9 @@ nnoremap <c-d> :JavaDocSearch -x declarations <cr>
 nnoremap <cr> :JavaSearchContext <cr>
 "added for using super tab in eclim context
 let g:SuperTabDefaultCompletionType = 'context'
+"open search result hit in new tab rather than split windows
 let g:EclimJavaSearchSingleResult = 'tabnew'
+"update status line as per project status
+set statusline=%<%f\ %M\ %h%r%=%-10.(%l,%c%V\ %{eclim#project#util#ProjectStatusLine()}%)\ %P
+
+
