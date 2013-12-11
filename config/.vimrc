@@ -72,7 +72,7 @@ set smartindent
 set cpoptions+=$
 set virtualedit=all
 " Nerd tree mapping
-nnoremap tree :NERDTreeToggle<cr>
+"nnoremap tree :NERDTreeToggle<cr>
 
 " Tab navigation mapping
 nnoremap <c-l> :tabn<cr>
@@ -80,14 +80,38 @@ nnoremap <c-h> :tabp<cr>
 nnoremap <c-n> :tabe<cr>
 
 "added for eclim
+filetype plugin indent on
 nnoremap <c-i> :JavaImport<cr>
 nnoremap <c-d> :JavaDocSearch -x declarations <cr>
 nnoremap <cr> :JavaSearchContext <cr>
 "added for using super tab in eclim context
-let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabMappingTabLiteral = '<tab>'
 "open search result hit in new tab rather than split windows
 let g:EclimJavaSearchSingleResult = 'tabnew'
 "update status line as per project status
 set statusline=%<%f\ %M\ %h%r%=%-10.(%l,%c%V\ %{eclim#project#util#ProjectStatusLine()}%)\ %P
-
-
+"initialize
+inoremap <tab> <c-x><c-u>
+nnoremap ;tree :ProjectTreeToggle <cr>
+nnoremap ;check :ProjectProblems <cr>
+nnoremap ;err :ProjectProblems!<cr>
+nnoremap ;refresh :ProjectRefresh <cr>
+nnoremap ;build :ProjectBuild <cr>
+nnoremap ;info :ProjectInfo <cr>
+nnoremap ;add :ProjectImport  
+nnoremap ;delete :ProjectDelete  
+nnoremap ;open :ProjectOpen  
+nnoremap ;close :ProjectClose  
+nnoremap ;list :ProjectList  <cr>
+nnoremap <c-f> :LocateFile <cr>
+nnoremap ;mark :Sign <cr>
+nnoremap ;showmarks :Signs <cr>
+nnoremap ;clearmarks :Signs <cr>
+nnoremap ;mov :JavaMove 
+nnoremap ;ren :JavaRename 
+"search call to open file in new tab
+let g:EclimLocateFileDefaultAction = "tabnew"
+" open tree automaticall for new tabs
+let g:EclimProjectTreeAutoOpen  = 1
+let g:EclimProjectTreeActions= [ { 'pattern': '.*', 'name': 'Edit', 'action': 'edit'}]
