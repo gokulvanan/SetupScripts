@@ -116,4 +116,3 @@ let g:EclimLocateFileDefaultAction = "tabnew"
 " open tree automaticall for new tabs
 let g:EclimProjectTreeAutoOpen  = 1
 let g:EclimProjectTreeActions= [ { 'pattern': '.*', 'name': 'Edit', 'action': 'edit'}]
-
