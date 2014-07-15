@@ -40,6 +40,7 @@ set history=700
  
 " Set to auto read when a file is changed from the outside
 set autoread
+
  
 "Always show current position
 set ruler
@@ -72,7 +73,7 @@ set smartindent
 set cpoptions+=$
 set virtualedit=all
 " Nerd tree mapping
-"nnoremap tree :NERDTreeToggle<cr>
+nnoremap ;nerd :NERDTreeToggle<cr>
 
 " Tab navigation mapping
 nnoremap <c-l> :tabn<cr>
