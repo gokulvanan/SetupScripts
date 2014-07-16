@@ -21,7 +21,8 @@ function gradleproj()
     mkdir -p $1/src/main/resources
     mkdir -p $1/src/test/java
     mkdir -p $1/src/test/resources
-    cp ~/Dropbox/build.gradle $1/build.gradle
+    cp ~/Dropbox/sample_build.gradle $1/build.gradle
+    cd $1
     gradle clean build
     gradle eclipse
   fi
