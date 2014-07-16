@@ -1,0 +1,66 @@
+
+#Added for work
+
+function send()
+{
+  echo $1 >> ~/temp/buff
+  #rsync -v -e ssh  ~/temp/buff gokul@192.168.1.30:~/
+  scp  ~/temp/buff mypc:~/
+}
+
+function social()
+{
+  if [ "$1" == "connect" ]; then
+     mysql -usocial -psocial123$ -h192.168.10.93 social 
+  else
+    echo "$1" | mysql -usocial -psocial123$ -h192.168.10.93 social -A
+  fi  
+}
+
+gr="/Users/gokulvanan/Softwares/gradle-1.0/bin/gradle"
+function prime()
+{
+  flag=$1
+  [[ -z "$flag" ]] && flag="status"
+  count=$(lsof -i tcp:9999  2>/tmp/null | sed 1d | wc -l)
+  #count=$(netstat -tulnp 2>/tmp/null | grep 9999 | wc -l)
+  if [ $count -eq 0 -a "$flag" == "start" ]; then
+    echo " starting primeapi"
+    cd ~/Git/komli/prime-services
+    `nohup $gr jettyRun > /tmp/primeService.log&`
+    cd  
+  elif [ $count -eq 1 -a "$flag" == "stop" ]; then
+    echo "stoping primeapi"
+    pid=$(lsof -i tcp:9999  2>/tmp/null | sed 1d | awk '{print $2 }')
+    `kill -9 $pid`
+  elif [ "$flag" == "status" ]; then
+    [ $count -eq 1 ] && echo "primeapi is running" || echo "primeapi is not running"
+  elif [ $count -eq 1 -a "$flag" == "log" ]; then
+    tail -f /Users/gokulvanan/Documents/Komli/primeapi/logs/api.log
+  elif [ "$flag" == "deploy" ]; then
+    ssh server93 'bash -s' < ~/Dropbox/komli/deployScript.sh
+  fi
+}
+
+function urg()
+{
+  flag=$1
+  [[ -z "$flag" ]] && flag="status"
+  count=$(lsof -i tcp:8080  2>/tmp/null | sed 1d | wc -l)
+  #count=$(netstat -tulnp 2>/tmp/null | grep 8080 | wc -l)
+  if [ $count -eq 0 -a "$flag" == "start" ]; then
+    echo " starting urg"
+    cd ~/Git/komli/urg/urg-service
+    `nohup $gr jettyRun > /tmp/urgService.log &`
+    cd
+  elif [ $count -eq 1 -a "$flag" == "stop" ]; then
+    echo "stoping urg"
+    pid=$(lsof -i tcp:8080  2>/tmp/null | sed 1d | awk '{print $2 }')
+    `kill -9 $pid`
+  elif [ "$flag" == "status" ]; then
+    [ $count -eq 1 ] && echo "urg is running" || echo "urg is not running"
+  elif [ $count -eq 1 -a "$flag" == "log" ]; then
+    tail -f /Users/gokulvanan/Documents/Komli/urg-service/logs/urg.log
+  fi
+}
+

@@ -1,0 +1,77 @@
+#maven utilities
+
+function mvn_validate()
+{
+  group=$1
+  artifact=$2
+  if [ -z "$group" ]; then
+    echo " groupId missing"
+    echo " usage mvnwebproj groupId artifactId"
+    return 1
+  fi
+  if [ -z "$artifact" ]; then
+    echo " artifactId missing"
+    echo " usage mvnwebproj groupId artifactId"
+    return 1
+  fi
+}
+
+function mvnwebproj()
+{
+  mvn_validate $1 $2
+  if [ $? -eq 0 ]; then
+    mvn archetype:generate \
+      -DgroupId=$1 \
+      -DartifactId=$2 \
+      -DarchetypeArtifactId=maven-archetype-webapp \
+      -DinteractiveMode=false
+  fi
+}
+
+function mvnproj()
+{
+  mvn_validate $1 $2
+  if [ $? -eq 0 ]; then
+    mvn archetype:generate \
+      -DgroupId=$1 \
+      -DartifactId=$2 \
+      -DarchetypeArtifactId=maven-archetype-quickstart \
+      -DinteractiveMode=false
+  fi
+  cp ~/Dropbox/default_pom.xml ./$2/pom.xml
+  sed 's/GROUP_ID/$1/g' ./$2/pom.xml
+  sed 's/ARTIFACT_ID/$2/g' ./$2/pom.xml
+}
+
+function mvnrun()
+{
+  if [ -z "$1" ]; then
+    echo " Main class missing"
+    echo " usage mvnrun mainClass [arg1 arg2]"
+    return 1
+  fi
+
+  if [ ! -e ./pom.xml ]; then
+    echo " You can only run this commnd inside a mvn project"
+    return 1
+  fi
+
+  count=$(find ./src/main/java/ -name $1 -print0 | xargs -0 grep "public static void main"| wc -l)
+  if [ $count -eq 0 ]; then
+    echo " $1 file not foud in current project $(pwd)"
+    return 1
+  fi
+
+  main_class=$(find . -name $1 | sed 's/^..//g' | sed 's/\//./g' | sed 's/^src.main.java.//g')
+
+  shift 1
+  if [ $# -gt 0 ]; then
+    mvn exec:java \
+      -Dexec.mainClass=$main_class \
+      -Dexec.args="$@"
+  else
+    echo "mvn exec:java -Dexec.mainClass=$main_class"
+  #  mvn exec:java \
+  #    -Dexec.mainClass=$main_class
+  fi
+}
