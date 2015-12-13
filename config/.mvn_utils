@@ -37,10 +37,11 @@ function mvnproj()
       -DartifactId=$2 \
       -DarchetypeArtifactId=maven-archetype-quickstart \
       -DinteractiveMode=false
+    cp ~/Dropbox/default_pom.xml ./$2/pom.xml
+    sed -i -e "s/GROUP_ID/$1/g" ./$2/pom.xml
+    sed -i -e "s/ARTIFACT_ID/$2/g" ./$2/pom.xml
+    rm ./$2/pom.xml-e
   fi
-  cp ~/Dropbox/default_pom.xml ./$2/pom.xml
-  sed 's/GROUP_ID/$1/g' ./$2/pom.xml
-  sed 's/ARTIFACT_ID/$2/g' ./$2/pom.xml
 }
 
 function mvnrun()
