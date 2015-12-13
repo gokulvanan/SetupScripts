@@ -1,0 +1,11 @@
+
+#alias jmc="/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/jmc"
+#jrocket # requires proper jdk to be installed in mac
+alias mission="java -XstartOnFirstThread -Djava.net.preferIPv4Stack=true -Dorg.eclipse.swt.internal.carbon.smallFonts -jar /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/lib/missioncontrol/mc.jar -ws cocoa"
+#helps manage different version of java in mac
+export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+export JAVA_7_HOME=$(/usr/libexec/java_home -v1.7)
+export JAVA_6_HOME=$(/usr/libexec/java_home -v1.6) 
+alias java6='export JAVA_HOME=$JAVA_6_HOME'
+alias java7='export JAVA_HOME=$JAVA_7_HOME'
+alias java8='export JAVA_HOME=$JAVA_8_HOME'
